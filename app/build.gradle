@@ -1,0 +1,61 @@
+static def gitSha() {
+    return "git rev-parse --short HEAD".execute().text.trim()
+}
+
+static def gitCount() {
+    return "git rev-list HEAD --first-parent --count".execute().text.trim()
+}
+
+static def gitTag() {
+    return "git describe --tags --abbrev=0".execute().text.trim()
+}
+
+static def getAutoVersionName() {
+    return this.hasProperty("tag") || this.hasProperty("publish") ? "${gitTag()}" : "${gitCount()} {${gitSha()}}"
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+
+    defaultConfig {
+        applicationId "net.techbrewery.weekendowka"
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        versionCode gitCount().toInteger()
+        versionName getAutoVersionName()
+        multiDexEnabled true
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation("com.android.support:appcompat-v7:$support_libs_version")
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    implementation "com.android.support:support-v4:$support_libs_version"
+    implementation "com.android.support:appcompat-v7:$support_libs_version"
+    implementation "com.android.support:design:$support_libs_version"
+    implementation "com.android.support:support-annotations:$support_libs_version"
+    implementation "com.android.support:recyclerview-v7:$support_libs_version"
+
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "android.arch.lifecycle:extensions:1.0.0-beta1"
+
+    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation 'com.github.jkwiecien:Switcher:2.1.5'
+    implementation 'joda-time:joda-time:2.9.9'
+
+    testApi 'junit:junit:4.12'
+}
