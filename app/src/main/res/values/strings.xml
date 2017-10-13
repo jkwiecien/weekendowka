@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">Weekendowka</string>
+    <string name="hint_company_name">Nazwa przedsiębiorstwa</string>
+    <string name="hint_address">Ulica i nr, kod pocztowy, miejscowość, państwo:</string>
+    <string name="hint_phone">Numer telefonu (w tym międzynarodowy numer kierunkowy):</string>
+    <string name="hint_e_mail">Adres e-mail</string>
+    <string name="hint_declarer_name">Imię i nazwisko oświadczyciela</string>
+    <string name="hint_declarer_position">Stanowisko w przedsiębiorstwie</string>
+    <string name="hint_driver_birthday">Data urodzenia</string>
+    <string name="hint_driver_id">Numer prawa jazdy lub dowodu osobistego lub paszportu</string>
+    <string name="hint_employment_date">Data zatrudnienia</string>
+    <string name="driver_rest_date_start_hint">Czas rozpoczęcia</string>
+    <string name="driver_rest_date_end_hint">Czas zakończenia</string>
+    <string name="hint_place_of_declarer_signing">Miejsce podpisania oświadczającego</string>
+    <string name="hint_place_of_driver_signing">Miejsce podpisania kierowcy</string>
+    <string name="date">Data</string>
 </resources>
