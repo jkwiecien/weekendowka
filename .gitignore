@@ -2,6 +2,9 @@
 # Created by https://www.gitignore.io/api/gradle,android,intellij,androidstudio
 
 ### Android ###
+# Since it’s open source it’s everybody responsibility to create his/her own firebase config
+**/google-services.json
+
 # Built application files
 *.apk
 *.ap_
