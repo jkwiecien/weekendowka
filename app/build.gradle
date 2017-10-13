@@ -32,6 +32,15 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
+    signingConfigs {
+        release {
+            storeFile file(project.property("techbrewery.keystore.path"))
+            storePassword project.property("techbrewery.keystore.pass")
+            keyAlias project.property("weekendowka.client.alias")
+            keyPassword project.property("weekendowka.client.pass")
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -50,6 +59,10 @@ dependencies {
     implementation "com.android.support:support-annotations:$support_libs_version"
     implementation "com.android.support:recyclerview-v7:$support_libs_version"
 
+    implementation "com.google.firebase:firebase-core:$play_services_version"
+    implementation "com.google.firebase:firebase-auth:$play_services_version"
+    implementation "com.google.firebase:firebase-firestore:$play_services_version"
+
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation "android.arch.lifecycle:extensions:1.0.0-beta1"
 
@@ -59,3 +72,5 @@ dependencies {
 
     testApi 'junit:junit:4.12'
 }
+
+apply plugin: 'com.google.gms.google-services'
