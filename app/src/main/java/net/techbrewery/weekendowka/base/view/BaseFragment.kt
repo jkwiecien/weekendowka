@@ -1,4 +1,4 @@
-package net.techbrewery.weekendowka.base
+package net.techbrewery.weekendowka.base.view
 
 import android.support.v4.app.Fragment
 

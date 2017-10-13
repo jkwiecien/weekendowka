@@ -14,4 +14,7 @@
     <string name="hint_place_of_declarer_signing">Miejsce podpisania oświadczającego</string>
     <string name="hint_place_of_driver_signing">Miejsce podpisania kierowcy</string>
     <string name="date">Data</string>
+    <string name="error_general">Coś poszło nie tak</string>
+    <string name="dismiss">Zamknij</string>
+    <string name="try_again">Spróbuj ponownie</string>
 </resources>
