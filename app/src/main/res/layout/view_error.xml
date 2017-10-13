@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="net.techbrewery.weekendowka.login.LoginActivity">
+    tools:context=".onboarding.login.LoginActivity">
 
     <TextView
         android:id="@+id/errorLabel"

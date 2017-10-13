@@ -1,8 +1,9 @@
-package net.techbrewery.weekendowka.login
+package net.techbrewery.weekendowka.onboarding.login
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.text.Html
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
@@ -25,9 +26,7 @@ class LoginActivity : BaseActivity(), LoginMvvm.View {
         setContentView(R.layout.activity_login)
 
         viewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
-
         setupView()
-        signIn(true)
     }
 
     private fun setupView() {
@@ -35,6 +34,8 @@ class LoginActivity : BaseActivity(), LoginMvvm.View {
         setupErrorObserver()
         setupUserObserver()
         setupDismissErrorButton(getString(R.string.try_again))
+        setupStartAppButton()
+        setupOnboardingMessage(getString(R.string.onboarding))
     }
 
     override fun setupSwitcher() {
@@ -51,12 +52,23 @@ class LoginActivity : BaseActivity(), LoginMvvm.View {
         dismissErrorButton.setOnClickListener { signIn(false) }
     }
 
+    override fun setupStartAppButton() {
+        startButtonAtOnboardingActivity.setOnClickListener { signIn(true) }
+    }
+
+    override fun setupOnboardingMessage(html: String) {
+        onboardingLabelAtLoginActivity.text = Html.fromHtml(html)
+    }
+
     override fun setupErrorObserver() {
         viewModel.errorLiveData.observe(this, Observer { switcher.showErrorView() })
     }
 
     override fun setupUserObserver() {
-        viewModel.userLiveData.observe(this, Observer { NavigationActivity.start(this) })
+        viewModel.userLiveData.observe(this, Observer {
+            NavigationActivity.start(this)
+            finish()
+        })
     }
 
     override fun signIn(firstAttempt: Boolean) {

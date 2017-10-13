@@ -1,4 +1,4 @@
-package net.techbrewery.weekendowka.login
+package net.techbrewery.weekendowka.onboarding.login
 
 import android.arch.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseUser
@@ -11,6 +11,8 @@ interface LoginMvvm {
     interface View {
         fun setupSwitcher()
         fun setupDismissErrorButton(title: String)
+        fun setupStartAppButton()
+        fun setupOnboardingMessage(html: String)
         fun setupUserObserver()
         fun setupErrorObserver()
         fun signIn(firstAttempt: Boolean)

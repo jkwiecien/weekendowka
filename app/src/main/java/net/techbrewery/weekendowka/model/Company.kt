@@ -1,14 +1,17 @@
 package net.techbrewery.weekendowka.model
 
 import java.io.Serializable
-import java.util.*
 
 /**
  * Created by Jacek Kwiecień on 13.10.2017.
  */
-data class Company(val id: String = UUID.randomUUID().toString()) : Serializable {
+data class Company(val id: String = "", val userId: String = "") : Serializable {
     var name = ""
     var address = ""
     var phone = ""
     var email = ""
+    var drivers = mutableListOf<Driver>()
+        private set
+    var declarers = mutableListOf<Declarer>()
+        private set
 }

@@ -4,7 +4,7 @@
     android:id="@+id/progressView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    tools:context="net.techbrewery.weekendowka.login.LoginActivity">
+    tools:context=".onboarding.login.LoginActivity">
 
     <ProgressBar
         style="?android:attr/progressBarStyle"

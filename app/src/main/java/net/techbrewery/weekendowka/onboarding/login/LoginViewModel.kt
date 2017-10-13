@@ -1,4 +1,4 @@
-package net.techbrewery.weekendowka.login
+package net.techbrewery.weekendowka.onboarding.login
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
