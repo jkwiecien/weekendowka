@@ -14,10 +14,26 @@ class Document(val id: String = UUID.randomUUID().toString()) : Serializable {
     }
 
     var action = DriverAction.REST
-    var actionStartTime = DateTime.now()
-    var actionEndTime = DateTime.now()
+    var actionStartDateTime = DateTime.now()
+    var actionEndDateTime = DateTime.now()
     var placeOfDeclarerSigning = ""
     var dateOfDeclarerSigning = DateTime.now()
     var placeOfDriverSigning = ""
     var dateOfDriverSigning = DateTime.now()
+
+    fun setStartDate(date: DateTime) {
+        actionStartDateTime = actionStartDateTime.withYear(date.year).withMonthOfYear(date.monthOfYear).withDayOfMonth(date.dayOfMonth)
+    }
+
+    fun setStartTime(time: Time) {
+        actionStartDateTime = actionStartDateTime.withHourOfDay(time.hourOfDay).withMinuteOfHour(time.minuteOfHour)
+    }
+
+    fun setEndDate(date: DateTime) {
+        actionEndDateTime = actionEndDateTime.withYear(date.year).withMonthOfYear(date.monthOfYear).withDayOfMonth(date.dayOfMonth)
+    }
+
+    fun setEndTime(time: Time) {
+        actionEndDateTime = actionEndDateTime.withHourOfDay(time.hourOfDay).withMinuteOfHour(time.minuteOfHour)
+    }
 }

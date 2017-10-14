@@ -9,4 +9,9 @@ import java.util.*
 class Declarer(val id: String = UUID.randomUUID().toString()) : Serializable {
     var name = ""
     var position = ""
+
+    constructor(name: String, position: String) : this(UUID.randomUUID().toString()) {
+        this.name = name
+        this.position = position
+    }
 }

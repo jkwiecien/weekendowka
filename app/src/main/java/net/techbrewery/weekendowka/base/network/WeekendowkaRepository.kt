@@ -2,7 +2,10 @@ package net.techbrewery.weekendowka.base.network
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import timber.log.Timber
+import com.google.firebase.firestore.FirebaseFirestore
+import net.techbrewery.weekendowka.base.Collection
+import net.techbrewery.weekendowka.model.Company
+import net.techbrewery.weekendowka.model.Document
 
 /**
  * Created by Jacek Kwiecień on 13.10.2017.
@@ -14,11 +17,59 @@ class WeekendowkaRepository : Repository {
         firebaseAuth.signInAnonymously().addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 requestListener.onSuccess(task.result.user)
-                Timber.d("Signed in annonymously %s", task.result.user.toString())
             } else {
                 requestListener.onFailure(task.exception ?: NullPointerException("Exception without exception... this shouldn't happen... like ever"))
-                Timber.e(task.exception, "Error signing in annonymously")
             }
         }
+    }
+
+    override fun saveCompany(company: Company, requestListener: FirestoreRequestListener<Company>) {
+        FirebaseFirestore.getInstance()
+                .collection(Collection.COMPANIES)
+                .document(company.id)
+                .set(company)
+                .addOnSuccessListener { requestListener.onSuccess(company) }
+                .addOnFailureListener { error -> requestListener.onFailure(error) }
+    }
+
+    override fun saveSelectedDeclarer(companyId: String, declarerId: String) {
+        FirebaseFirestore.getInstance()
+                .collection(Collection.COMPANIES)
+                .document(companyId)
+                .update("selectedDeclarerId", declarerId)
+    }
+
+    override fun saveSelectedDriver(companyId: String, driverId: String) {
+        FirebaseFirestore.getInstance()
+                .collection(Collection.COMPANIES)
+                .document(companyId)
+                .update("selectedDriverId", driverId)
+    }
+
+    override fun saveDocument(companyId: String, document: Document, requestListener: FirestoreRequestListener<Document>) {
+        FirebaseFirestore.getInstance()
+                .collection(Collection.COMPANIES)
+                .document(companyId)
+                .collection(Collection.DOCUMENTS)
+                .document(document.id)
+                .set(document)
+                .addOnSuccessListener { requestListener.onSuccess(document) }
+                .addOnFailureListener { error -> requestListener.onFailure(error) }
+    }
+
+    override fun getCompany(userId: String, requestListener: FirestoreRequestListener<Company?>) {
+        FirebaseFirestore.getInstance()
+                .collection(Collection.COMPANIES)
+                .whereEqualTo("userId", userId)
+                .get()
+                .addOnSuccessListener { querySnapshot ->
+                    if (!querySnapshot.isEmpty) {
+                        val company = querySnapshot.documents[0].toObject(Company::class.java)
+                        requestListener.onSuccess(company)
+                    } else {
+                        requestListener.onSuccess(null)
+                    }
+                }
+                .addOnFailureListener { error -> requestListener.onFailure(error) }
     }
 }

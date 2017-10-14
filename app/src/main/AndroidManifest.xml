@@ -19,7 +19,23 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".navigation.NavigationActivity" />
+        <activity
+            android:name=".onboarding.company.CompanyActivity"
+            android:label="@string/activity_title_company" />
+
+        <activity
+            android:name=".onboarding.declarer.DeclarerActivity"
+            android:label="@string/activity_title_declarer" />
+
+        <activity
+            android:name=".onboarding.driver.DriverActivity"
+            android:label="@string/activity_title_driver" />
+
+        <activity android:name=".document.DocumentActivity" />
+
+        <activity
+            android:name=".declarers.DeclarersActivity"
+            android:label="@string/activity_title_declarers" />
 
     </application>
 

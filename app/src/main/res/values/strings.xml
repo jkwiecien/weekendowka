@@ -19,4 +19,11 @@
     <string name="try_again">Spróbuj ponownie</string>
     <string name="onboarding"><![CDATA[<b>Cześć, jestem Jacek. Witaj w mojej aplikacji!</b><br><br>Stworzyłem ją, w ramach prezentu, na 60 urodziny mojego taty. Jest ona dodatkiem do tabletu, który mam nadzieje wprowadzi tatę w świat nowoczesnej technologii :)<br><br>Aplikacja służy łatwemu generowaniu powtarzających się oświadczeń o odpoczynku kierowców pojazdów zarobkowych powyżej 3,5t i jest dostępna za darmo dla wszystkich zainteresowanych.<br><br>W następnych krokach zostaniesz poproszony o wpisanie kilku podstawowych informacji o firmie, osobie oświadczającej i kierowcy. Informacje te będą następnie wykorzystywane przy kolejnych oświadczeniach, co znaczy że już się tutaj nie zobaczymy. Pozdrawiam!]]></string>
     <string name="button_title_start_app">Rozpocznij</string>
+    <string name="activity_title_company">Informacje o przedsiębiorstwie</string>
+    <string name="activity_title_declarer">Informacje o oświadczającym</string>
+    <string name="activity_title_driver">Informacje o kierowcy</string>
+    <string name="save">Zapisz</string>
+    <string name="hint_declarer">Oświadczający</string>
+    <string name="hint_Driver">Kierowca</string>
+    <string name="activity_title_declarers">Wybór oświadczającego</string>
 </resources>

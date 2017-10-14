@@ -37,31 +37,62 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/contentAtLoginActivity"
+            android:id="@+id/contentAtDeclarerActivity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding_regular">
 
-            <TextView
-                android:id="@+id/onboardingLabelAtLoginActivity"
-                android:layout_width="match_parent"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/nameInputLayoutArDeclarerActivity"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:fontFamily="@string/font_family_light"
-                android:gravity="center"
-                android:text="@string/onboarding"
-                android:textSize="@dimen/text_size_large" />
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <EditText
+                    android:id="@+id/nameInputArDeclarerActivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_declarer_name"
+                    android:text="Stanisław Kwiecień" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/positionInputLayoutArDeclarerActivity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/nameInputLayoutArDeclarerActivity">
+
+                <EditText
+                    android:id="@+id/positionInputArDeclarerActivity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/hint_declarer_position"
+                    android:text="właściciel" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <Button
-                android:id="@+id/startButtonAtOnboardingActivity"
+                android:id="@+id/saveButtonAtDeclarerActivity"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="@dimen/padding_regular"
-                android:text="@string/button_title_start_app"
+                android:text="@string/save"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/onboardingLabelAtLoginActivity" />
+                app:layout_constraintTop_toBottomOf="@+id/positionInputLayoutArDeclarerActivity" />
 
         </android.support.constraint.ConstraintLayout>
 
