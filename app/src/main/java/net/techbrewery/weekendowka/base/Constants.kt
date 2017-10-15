@@ -24,5 +24,6 @@ class BundleKey {
 
     companion object {
         val COMPANY = "net.techbrewery.weekendowka_COMPANY"
+        val DOCUMENT = "net.techbrewery.weekendowka_DOCUMENT"
     }
 }

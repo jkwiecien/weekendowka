@@ -114,7 +114,8 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
             document.placeOfDriverSigning = placeOfDriverSigning
             repository.saveDocument(company.id, document, object : FirestoreRequestListener<Document> {
                 override fun onSuccess(responseObject: Document) {
-                    eventLiveData.postValue(DocumentViewEvent.DocumentSaved(responseObject))
+                    documentLiveData.value = document.copy()
+                    eventLiveData.postValue(DocumentViewEvent.DocumentSaved(company, responseObject))
                 }
 
                 override fun onFailure(error: Throwable) {

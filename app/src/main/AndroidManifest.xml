@@ -11,6 +11,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <provider
+            android:name=".base.WeekendowkaFileProvider"
+            android:authorities="${applicationId}.file.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <activity android:name="net.techbrewery.weekendowka.onboarding.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,5 +1,7 @@
 package net.techbrewery.weekendowka.model
 
+import android.os.Bundle
+import net.techbrewery.weekendowka.base.BundleKey
 import org.joda.time.DateTime
 import java.io.Serializable
 import java.util.*
@@ -7,7 +9,7 @@ import java.util.*
 /**
  * Created by Jacek Kwiecień on 13.10.2017.
  */
-class Document(val id: String = UUID.randomUUID().toString()) : Serializable {
+class Document(var id: String = UUID.randomUUID().toString()) : Serializable {
 
     enum class DriverAction {
         L4, VACATION, REST, OTHER_DRIVING, OTHER_WORK, STANDBY
@@ -44,5 +46,13 @@ class Document(val id: String = UUID.randomUUID().toString()) : Serializable {
         var dateTime = DateTime(actionStartDate)
         dateTime = dateTime.withHourOfDay(time.hourOfDay).withMinuteOfHour(time.minuteOfHour)
         actionEndDate = dateTime.toDate()
+    }
+
+    fun copy(): Document {
+        val bundle = Bundle()
+        bundle.putSerializable(BundleKey.DOCUMENT, this)
+        val copy = bundle.getSerializable(BundleKey.DOCUMENT) as Document
+        copy.id = UUID.randomUUID().toString()
+        return copy
     }
 }

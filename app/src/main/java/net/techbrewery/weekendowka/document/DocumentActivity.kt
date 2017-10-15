@@ -5,6 +5,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.content.FileProvider
 import kotlinx.android.synthetic.main.activity_document.*
 import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
@@ -18,6 +19,7 @@ import net.techbrewery.weekendowka.model.Company
 import net.techbrewery.weekendowka.model.Time
 import org.joda.time.DateTime
 import pl.aprilapps.switcher.Switcher
+import timber.log.Timber
 
 /**
  * Created by Jacek Kwiecień on 13.10.2017.
@@ -66,11 +68,30 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
         setupDriverSigningPlaceInput()
         setupSelectedDeclarerInput()
         setupSelectedDriverInput()
+        setupSaveButton()
     }
 
     override fun setupEventObserver() {
         viewModel.eventLiveData.observe(this, Observer { event ->
-
+            when (event) {
+                is DocumentViewEvent.DocumentSaved -> {
+                    val pdfCreator = PdfCreator(this)
+                    val pdfFile = pdfCreator.createDocument(event.company, event.document)
+                    pdfFile?.let {
+                        val uri = FileProvider.getUriForFile(this, applicationContext.packageName + ".file.provider", pdfFile)
+                        val intent = Intent(Intent.ACTION_VIEW)
+                        intent.setDataAndType(uri, "application/pdf")
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        startActivity(intent)
+                        switcher.showContentView()
+                    }
+                }
+                is DocumentViewEvent.Error -> {
+                    Timber.e(event.error)
+                    switcher.showErrorView()
+                }
+            }
         })
     }
 
