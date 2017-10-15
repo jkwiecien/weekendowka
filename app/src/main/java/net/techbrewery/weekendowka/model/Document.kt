@@ -15,26 +15,34 @@ class Document(val id: String = UUID.randomUUID().toString()) : Serializable {
 
     var action = DriverAction.REST
     val dateOfCreation = DateTime.now()
-    var actionStartDateTime = DateTime.now()
-    var actionEndDateTime = DateTime.now()
+    var actionStartDate = DateTime.now().toDate()
+    var actionEndDate = DateTime.now().toDate()
     var placeOfDeclarerSigning = ""
-    var dateOfDeclarerSigning = DateTime.now()
+    var dateOfDeclarerSigning = DateTime.now().toDate()
     var placeOfDriverSigning = ""
-    var dateOfDriverSigning = DateTime.now()
+    var dateOfDriverSigning = DateTime.now().toDate()
 
     fun setStartDate(date: DateTime) {
-        actionStartDateTime = actionStartDateTime.withYear(date.year).withMonthOfYear(date.monthOfYear).withDayOfMonth(date.dayOfMonth)
+        var dateTime = DateTime(actionStartDate)
+        dateTime = dateTime.withYear(date.year).withMonthOfYear(date.monthOfYear).withDayOfMonth(date.dayOfMonth)
+        actionStartDate = dateTime.toDate()
     }
 
     fun setStartTime(time: Time) {
-        actionStartDateTime = actionStartDateTime.withHourOfDay(time.hourOfDay).withMinuteOfHour(time.minuteOfHour)
+        var dateTime = DateTime(actionStartDate)
+        dateTime = dateTime.withHourOfDay(time.hourOfDay).withMinuteOfHour(time.minuteOfHour)
+        actionStartDate = dateTime.toDate()
     }
 
     fun setEndDate(date: DateTime) {
-        actionEndDateTime = actionEndDateTime.withYear(date.year).withMonthOfYear(date.monthOfYear).withDayOfMonth(date.dayOfMonth)
+        var dateTime = DateTime(actionEndDate)
+        dateTime = dateTime.withYear(date.year).withMonthOfYear(date.monthOfYear).withDayOfMonth(date.dayOfMonth)
+        actionEndDate = dateTime.toDate()
     }
 
     fun setEndTime(time: Time) {
-        actionEndDateTime = actionEndDateTime.withHourOfDay(time.hourOfDay).withMinuteOfHour(time.minuteOfHour)
+        var dateTime = DateTime(actionStartDate)
+        dateTime = dateTime.withHourOfDay(time.hourOfDay).withMinuteOfHour(time.minuteOfHour)
+        actionEndDate = dateTime.toDate()
     }
 }

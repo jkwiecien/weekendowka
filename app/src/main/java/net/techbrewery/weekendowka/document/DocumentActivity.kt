@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
 import net.techbrewery.weekendowka.R
 import net.techbrewery.weekendowka.base.BundleKey
+import net.techbrewery.weekendowka.base.extensions.toDateTime
 import net.techbrewery.weekendowka.base.view.BaseActivity
 import net.techbrewery.weekendowka.base.view.DatePickerInput
 import net.techbrewery.weekendowka.base.view.TimePickerInput
@@ -76,12 +77,12 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     override fun setupDocumentObserver() {
         viewModel.documentLiveData.observe(this, Observer { document ->
             document?.let {
-                driverRestStartDateInputAtDocumentActivity.update(document.actionStartDateTime)
-                driverRestStartTimeInputAtDocumentActivity.update(Time(document.actionStartDateTime))
-                driverRestEndDateInputAtDocumentActivity.update(document.actionEndDateTime)
-                driverRestEndTimeInputAtDocumentActivity.update(Time(document.actionEndDateTime))
-                dateOfDeclarerSigningInputAtDocumentActivity.update(document.dateOfDeclarerSigning)
-                dateOfDriverSigningInputAtDocumentActivity.update(document.dateOfDriverSigning)
+                driverRestStartDateInputAtDocumentActivity.update(document.actionStartDate.toDateTime())
+                driverRestStartTimeInputAtDocumentActivity.update(Time(document.actionStartDate.toDateTime()))
+                driverRestEndDateInputAtDocumentActivity.update(document.actionEndDate.toDateTime())
+                driverRestEndTimeInputAtDocumentActivity.update(Time(document.actionEndDate.toDateTime()))
+                dateOfDeclarerSigningInputAtDocumentActivity.update(document.dateOfDeclarerSigning.toDateTime())
+                dateOfDriverSigningInputAtDocumentActivity.update(document.dateOfDriverSigning.toDateTime())
             }
         })
     }

@@ -10,7 +10,7 @@ import java.util.*
  */
 class Driver(val id: String = UUID.randomUUID().toString()) : Serializable {
     var name = ""
-    var birthday: DateTime = DateTime.now().minusYears(Configuration.DEFAULT_DRIVER_AGE)
+    var birthday = DateTime.now().minusYears(Configuration.DEFAULT_DRIVER_AGE).toDate()
     var idNumber = ""
-    var employmentDate: DateTime = DateTime.now().minusYears(Configuration.DEFAULT_EMPLOYMENT_TIME)
+    var employmentDate = DateTime.now().minusYears(Configuration.DEFAULT_EMPLOYMENT_TIME).toDate()
 }

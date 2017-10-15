@@ -4,6 +4,7 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import net.techbrewery.weekendowka.base.extensions.repository
+import net.techbrewery.weekendowka.base.extensions.toDateTime
 import net.techbrewery.weekendowka.base.network.FirestoreRequestListener
 import net.techbrewery.weekendowka.model.Company
 import net.techbrewery.weekendowka.model.Document
@@ -28,34 +29,34 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
 
     override fun getStartDateTime(): DateTime {
         val document = documentLiveData.value
-        return document?.actionStartDateTime ?: DateTime.now()
+        return document?.actionStartDate?.toDateTime() ?: DateTime.now()
     }
 
     override fun getStartTime(): Time {
         val document = documentLiveData.value
-        val dateTime = document?.actionStartDateTime ?: DateTime.now()
+        val dateTime = document?.actionStartDate?.toDateTime() ?: DateTime.now()
         return Time(dateTime)
     }
 
     override fun getEndDateTime(): DateTime {
         val document = documentLiveData.value
-        return document?.actionEndDateTime ?: DateTime.now()
+        return document?.actionEndDate?.toDateTime() ?: DateTime.now()
     }
 
     override fun getEndTime(): Time {
         val document = documentLiveData.value
-        val dateTime = document?.actionEndDateTime ?: DateTime.now()
+        val dateTime = document?.actionEndDate?.toDateTime() ?: DateTime.now()
         return Time(dateTime)
     }
 
     override fun getDateOfDeclarerSigning(): DateTime {
         val document = documentLiveData.value
-        return document?.dateOfDeclarerSigning ?: DateTime.now()
+        return document?.dateOfDeclarerSigning?.toDateTime() ?: DateTime.now()
     }
 
     override fun getDateOfDriverSigning(): DateTime {
         val document = documentLiveData.value
-        return document?.dateOfDriverSigning ?: DateTime.now()
+        return document?.dateOfDriverSigning?.toDateTime() ?: DateTime.now()
     }
 
     override fun onStartDatePicked(dateTime: DateTime) {
@@ -93,7 +94,7 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
     override fun onDateOfDeclarerSigningPicked(dateTime: DateTime) {
         val document = documentLiveData.value
         document?.let {
-            document.dateOfDeclarerSigning = dateTime
+            document.dateOfDeclarerSigning = dateTime.toDate()
             documentLiveData.postValue(document)
         }
     }
@@ -101,7 +102,7 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
     override fun onDateOfDriverSigningPicked(dateTime: DateTime) {
         val document = documentLiveData.value
         document?.let {
-            document.dateOfDriverSigning = dateTime
+            document.dateOfDriverSigning = dateTime.toDate()
             documentLiveData.postValue(document)
         }
     }

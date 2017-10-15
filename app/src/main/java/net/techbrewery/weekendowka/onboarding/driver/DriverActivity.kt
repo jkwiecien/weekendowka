@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
 import net.techbrewery.weekendowka.R
 import net.techbrewery.weekendowka.base.BundleKey
+import net.techbrewery.weekendowka.base.extensions.toDateTime
 import net.techbrewery.weekendowka.base.view.DatePickerInput
 import net.techbrewery.weekendowka.document.DocumentActivity
 import net.techbrewery.weekendowka.model.Company
@@ -89,13 +90,13 @@ class DriverActivity : AppCompatActivity(), DriverMvvm.View {
         birthdayInputAtDriverActivity.datePickerListener = object : DatePickerInput.DatePickerListener {
             override fun provideDate(): DateTime {
                 val driver = viewModel.driverLiveData.value
-                return driver?.birthday ?: DateTime.now()
+                return driver?.birthday?.toDateTime() ?: DateTime.now()
             }
 
             override fun onDatePicked(date: DateTime) {
                 val driver = viewModel.driverLiveData.value
                 driver?.let {
-                    driver.birthday = date
+                    driver.birthday = date.toDate()
                     viewModel.driverLiveData.postValue(driver)
                 }
             }
@@ -106,13 +107,13 @@ class DriverActivity : AppCompatActivity(), DriverMvvm.View {
         employmentDateInputAtDriverActivity.datePickerListener = object : DatePickerInput.DatePickerListener {
             override fun provideDate(): DateTime {
                 val driver = viewModel.driverLiveData.value
-                return driver?.employmentDate ?: DateTime.now()
+                return driver?.employmentDate?.toDateTime() ?: DateTime.now()
             }
 
             override fun onDatePicked(date: DateTime) {
                 val driver = viewModel.driverLiveData.value
                 driver?.let {
-                    driver.employmentDate = date
+                    driver.employmentDate = date.toDate()
                     viewModel.driverLiveData.postValue(driver)
                 }
             }
@@ -122,8 +123,8 @@ class DriverActivity : AppCompatActivity(), DriverMvvm.View {
     override fun setupDriverObserver() {
         viewModel.driverLiveData.observe(this, Observer { driver ->
             driver?.let {
-                birthdayInputAtDriverActivity.update(driver.birthday)
-                employmentDateInputAtDriverActivity.update(driver.employmentDate)
+                birthdayInputAtDriverActivity.update(driver.birthday.toDateTime())
+                employmentDateInputAtDriverActivity.update(driver.employmentDate.toDateTime())
             }
         })
     }
