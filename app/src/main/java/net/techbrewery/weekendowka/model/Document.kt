@@ -14,6 +14,7 @@ class Document(val id: String = UUID.randomUUID().toString()) : Serializable {
     }
 
     var action = DriverAction.REST
+    val dateOfCreation = DateTime.now()
     var actionStartDateTime = DateTime.now()
     var actionEndDateTime = DateTime.now()
     var placeOfDeclarerSigning = ""
