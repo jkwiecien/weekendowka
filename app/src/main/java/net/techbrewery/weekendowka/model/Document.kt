@@ -23,6 +23,8 @@ class Document(var id: String = UUID.randomUUID().toString()) : Serializable {
     var dateOfDeclarerSigning = DateTime.now().toDate()
     var placeOfDriverSigning = ""
     var dateOfDriverSigning = DateTime.now().toDate()
+    var declarer: Declarer? = null
+    var driver: Driver? = null
 
     fun setStartDate(date: DateTime) {
         var dateTime = DateTime(actionStartDate)

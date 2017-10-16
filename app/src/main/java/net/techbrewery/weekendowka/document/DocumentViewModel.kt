@@ -112,6 +112,8 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
         document?.let {
             document.placeOfDeclarerSigning = placeOfDeclarerSigning
             document.placeOfDriverSigning = placeOfDriverSigning
+            document.declarer = company.getSelectedDeclarer()
+            document.driver = company.getSelectedDriver()
             repository.saveDocument(company.id, document, object : FirestoreRequestListener<Document> {
                 override fun onSuccess(responseObject: Document) {
                     documentLiveData.value = document.copy()
