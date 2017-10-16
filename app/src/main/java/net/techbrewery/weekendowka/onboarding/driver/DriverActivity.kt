@@ -77,7 +77,10 @@ class DriverActivity : AppCompatActivity(), DriverMvvm.View {
     override fun setupEventObserver() {
         viewModel.eventLiveData.observe(this, Observer { event ->
             when (event) {
-                is DriverViewEvent.DriverSaved -> DocumentActivity.start(this, event.company)
+                is DriverViewEvent.DriverSaved -> {
+                    DocumentActivity.start(this, event.company)
+                    finish()
+                }
                 is DriverViewEvent.Error -> {
                     Timber.d(event.error)
                     switcher.showErrorView()

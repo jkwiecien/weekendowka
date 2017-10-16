@@ -14,6 +14,7 @@ interface CompanyMvvm {
         fun setupDismissErrorButton()
         fun setupErrorObserver()
         fun setupCompanyObserver()
+        fun setupEmailInput()
         fun setSaveButtonEnabled(enabled: Boolean)
     }
 

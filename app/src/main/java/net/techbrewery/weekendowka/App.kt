@@ -11,11 +11,12 @@ import timber.log.Timber
  */
 class App : Application() {
 
-    val repository: Repository = WeekendowkaRepository()
+    lateinit var repository: Repository
 
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.DEBUG) Timber.plant(Timber.DebugTree())
+        repository = WeekendowkaRepository(applicationContext)
         FirebaseApp.initializeApp(this)
     }
 }

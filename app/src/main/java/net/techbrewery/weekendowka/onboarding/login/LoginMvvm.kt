@@ -14,7 +14,6 @@ interface LoginMvvm {
         fun setupDismissErrorButton()
         fun setupStartAppButton()
         fun setupOnboardingMessage(html: String)
-        fun setupUserObserver()
         fun setupCompanyObserver()
         fun setupErrorObserver()
         fun signIn(firstAttempt: Boolean)

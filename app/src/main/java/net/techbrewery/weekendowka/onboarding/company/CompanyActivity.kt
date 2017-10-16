@@ -9,6 +9,7 @@ import kotlinx.android.synthetic.main.activity_company.*
 import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
 import net.techbrewery.weekendowka.R
+import net.techbrewery.weekendowka.base.BundleKey
 import net.techbrewery.weekendowka.base.view.BaseActivity
 import net.techbrewery.weekendowka.onboarding.declarer.DeclarerActivity
 import pl.aprilapps.switcher.Switcher
@@ -20,8 +21,9 @@ import timber.log.Timber
 class CompanyActivity : BaseActivity(), CompanyMvvm.View {
 
     companion object {
-        fun start(activity: Activity) {
+        fun start(activity: Activity, email: String) {
             val intent = Intent(activity, CompanyActivity::class.java)
+            intent.putExtra(BundleKey.EMAIL, email)
             activity.startActivity(intent)
         }
     }
@@ -69,6 +71,10 @@ class CompanyActivity : BaseActivity(), CompanyMvvm.View {
         saveButtonAtCompanyActivity.setOnClickListener { save() }
     }
 
+    override fun setupEmailInput() {
+        emailInputAtCompanyActivity.setText(intent.getStringExtra(BundleKey.EMAIL))
+    }
+
     override fun setSaveButtonEnabled(enabled: Boolean) {
         saveButtonAtCompanyActivity.isEnabled = enabled
     }
@@ -90,5 +96,6 @@ class CompanyActivity : BaseActivity(), CompanyMvvm.View {
         setupDismissErrorButton()
         setupErrorObserver()
         setupCompanyObserver()
+        setupEmailInput()
     }
 }
