@@ -79,7 +79,7 @@ class PdfCreator(context: Context) {
 
             pdfDocument.add(Phrase("Ja, jako kierowca, potwierdzam, że w wyżej wymienionym okresie nie prowadziłem pojazdu wchodzącego w zakres stosowania (WE) nr 561/2006 lub AETR.\n\n", Font(ROBOTO_ITALIC, 14f)))
             pdfDocument.add(Phrase("Miejscowość i data: ${document.placeOfDriverSigning}, ${DATE_FORMAT.print(document.dateOfDriverSigning.toDateTime())}\n", Font(ROBOTO_REGULAR, 14f)))
-            pdfDocument.add(Phrase("Podpis kierowcy: ________________________\n\n\n\n", Font(ROBOTO_REGULAR, 14f)))
+            pdfDocument.add(Phrase("Podpis kierowcy: ________________________", Font(ROBOTO_REGULAR, 14f)))
 
             pdfDocument.close()
 
