@@ -3,6 +3,8 @@ package net.techbrewery.weekendowka.document
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
+import android.preference.PreferenceManager
+import net.techbrewery.weekendowka.base.BundleKey
 import net.techbrewery.weekendowka.base.extensions.repository
 import net.techbrewery.weekendowka.base.extensions.toDateTime
 import net.techbrewery.weekendowka.base.network.FirestoreRequestListener
@@ -110,6 +112,14 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
     override fun onDriverActionSelected(action: String) {
         val document = documentLiveData.value
         document?.let { document.driverAction = action }
+    }
+
+    override fun onPlaceOfDeclarerSigningChanged(place: String) {
+        PreferenceManager.getDefaultSharedPreferences(getApplication()).edit().putString(BundleKey.PLACE_OF_DECLARER_SIGNING, place).apply()
+    }
+
+    override fun onPlaceOfDriverSigningChanged(place: String) {
+        PreferenceManager.getDefaultSharedPreferences(getApplication()).edit().putString(BundleKey.PLACE_OF_DRIVER_SIGNING, place).apply()
     }
 
     override fun saveDocument(placeOfDeclarerSigning: String, placeOfDriverSigning: String) {

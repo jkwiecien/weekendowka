@@ -6,6 +6,8 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.FileProvider
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,6 +16,7 @@ import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
 import net.techbrewery.weekendowka.R
 import net.techbrewery.weekendowka.base.BundleKey
+import net.techbrewery.weekendowka.base.extensions.sharedPreferences
 import net.techbrewery.weekendowka.base.extensions.toDateTime
 import net.techbrewery.weekendowka.base.view.BaseActivity
 import net.techbrewery.weekendowka.base.view.DatePickerInput
@@ -189,7 +192,16 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     }
 
     override fun setupDeclarerSigningPlaceInput() {
-        //TODO
+        placeOfDriverSigningInputAtDocumentActivity.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {
+                viewModel.onPlaceOfDeclarerSigningChanged(charSequence.toString())
+            }
+        })
+        placeOfDriverSigningInputAtDocumentActivity.setText(sharedPreferences.getString(BundleKey.PLACE_OF_DECLARER_SIGNING, ""))
     }
 
     override fun setupDriverSigningDateInput() {
@@ -205,7 +217,16 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     }
 
     override fun setupDriverSigningPlaceInput() {
-        //TODO
+        placeOfDriverSigningInputAtDocumentActivity.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {}
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(charSequence: CharSequence, start: Int, before: Int, count: Int) {
+                viewModel.onPlaceOfDriverSigningChanged(charSequence.toString())
+            }
+        })
+        placeOfDriverSigningInputAtDocumentActivity.setText(sharedPreferences.getString(BundleKey.PLACE_OF_DRIVER_SIGNING, ""))
     }
 
     override fun setupSelectedDeclarerInput() {

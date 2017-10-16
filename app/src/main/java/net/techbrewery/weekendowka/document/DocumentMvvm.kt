@@ -47,6 +47,8 @@ interface DocumentMvvm {
         fun onDateOfDeclarerSigningPicked(dateTime: DateTime)
         fun onDateOfDriverSigningPicked(dateTime: DateTime)
         fun onDriverActionSelected(action: String)
+        fun onPlaceOfDeclarerSigningChanged(place: String)
+        fun onPlaceOfDriverSigningChanged(place: String)
         fun getDateOfDeclarerSigning(): DateTime
         fun getDateOfDriverSigning(): DateTime
         fun getEndTime(): Time

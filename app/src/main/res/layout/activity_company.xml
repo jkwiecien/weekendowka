@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_company_name"
                     android:inputType="textCapSentences"
-                    android:text="Przewóz Osób Stanisław Kwiecień" />
+                    tools:text="Przewóz Osób Stanisław Kwiecień" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -79,8 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_address"
-                    android:inputType="textCapSentences"
-                    android:text="Pasturka 16A, 28-400, Pińczów, Polska" />
+                    android:inputType="textCapWords"
+                    tools:text="Pasturka 16A, 28-400, Pińczów, Polska" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -102,7 +102,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_phone"
                     android:inputType="phone"
-                    android:text="+48 604 321 024" />
+                    tools:text="+48 604 321 024" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -124,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_e_mail"
                     android:inputType="textEmailAddress"
-                    android:text="busponidzie@gmail.com" />
+                    tools:text="busponidzie@gmail.com" />
 
             </android.support.design.widget.TextInputLayout>
 

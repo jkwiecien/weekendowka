@@ -58,7 +58,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_declarer_name"
-                    android:text="Stanisław Kwiecień" />
+                    android:inputType="textCapWords"
+                    tools:text="Stanisław Kwiecień" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -78,7 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_declarer_position"
-                    android:text="właściciel" />
+                    android:inputType="textCapSentences"
+                    tools:text="właściciel" />
 
             </android.support.design.widget.TextInputLayout>
 

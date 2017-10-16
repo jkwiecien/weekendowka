@@ -25,5 +25,7 @@ class BundleKey {
     companion object {
         val COMPANY = "net.techbrewery.weekendowka_COMPANY"
         val DOCUMENT = "net.techbrewery.weekendowka_DOCUMENT"
+        val PLACE_OF_DECLARER_SIGNING = "net.techbrewery.weekendowka_PLACE_OF_DECLARER_SIGNING"
+        val PLACE_OF_DRIVER_SIGNING = "net.techbrewery.weekendowka_PLACE_OF_DRIVER_SIGNING"
     }
 }

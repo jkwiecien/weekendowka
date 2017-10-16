@@ -196,7 +196,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_place_of_declarer_signing"
-                    android:text="Pasturka" />
+                    android:inputType="textCapSentences"
+                    tools:text="Pasturka" />
 
             </android.support.design.widget.TextInputLayout>
 
@@ -238,7 +239,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_place_of_driver_signing"
-                    android:text="Pasturka" />
+                    android:inputType="textCapSentences"
+                    tools:text="Pasturka" />
 
             </android.support.design.widget.TextInputLayout>
 

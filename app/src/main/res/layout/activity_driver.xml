@@ -58,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_declarer_name"
+                    android:inputType="textCapWords"
                     tools:text="Jacek Kwiecień" />
 
             </android.support.design.widget.TextInputLayout>
@@ -98,6 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_driver_id"
+                    android:inputType="textCapCharacters"
                     tools:text="AFX 353568" />
 
             </android.support.design.widget.TextInputLayout>
