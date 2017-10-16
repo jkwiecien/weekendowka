@@ -11,11 +11,8 @@ import java.util.*
  */
 class Document(var id: String = UUID.randomUUID().toString()) : Serializable {
 
-    enum class DriverAction {
-        L4, VACATION, REST, OTHER_DRIVING, OTHER_WORK, STANDBY
-    }
 
-    var action = DriverAction.REST
+    var driverAction = ""
     val dateOfCreation = DateTime.now()
     var actionStartDate = DateTime.now().toDate()
     var actionEndDate = DateTime.now().toDate()

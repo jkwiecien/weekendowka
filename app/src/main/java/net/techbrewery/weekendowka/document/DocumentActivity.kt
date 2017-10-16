@@ -6,6 +6,9 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.content.FileProvider
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_document.*
 import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
@@ -20,6 +23,7 @@ import net.techbrewery.weekendowka.model.Time
 import org.joda.time.DateTime
 import pl.aprilapps.switcher.Switcher
 import timber.log.Timber
+
 
 /**
  * Created by Jacek Kwiecień on 13.10.2017.
@@ -62,6 +66,7 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
         setupRestStartTimeInput()
         setupRestEndDateInput()
         setupRestEndTimeInput()
+        setupDriverActionDropdown()
         setupDeclarerSigningDateInput()
         setupDeclarerSigningPlaceInput()
         setupDriverSigningDateInput()
@@ -165,6 +170,21 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
             override fun onDatePicked(date: DateTime) {
                 viewModel.onDateOfDeclarerSigningPicked(date)
             }
+        }
+    }
+
+    override fun setupDriverActionDropdown() {
+        val adapter = ArrayAdapter.createFromResource(this, R.array.driver_actions, android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        driverActionDropdownAtDocumentActivity.adapter = adapter
+        driverActionDropdownAtDocumentActivity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {}
+
+            override fun onItemSelected(adapterView: AdapterView<*>, parentView: View?, position: Int, id: Long) {
+                val adapter = adapterView.adapter as ArrayAdapter<String>
+                viewModel.onDriverActionSelected(adapter.getItem(position))
+            }
+
         }
     }
 

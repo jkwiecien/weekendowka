@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="driver_actions">
+        <item>miał czas wolny od pracy lub odpoczywał</item>
+        <item>przebywał na zwolnieniu chorobowym</item>
+        <item>przebywał na urlopie wypoczynkowym</item>
+        <item>prowadził pojazd wyłączony z zakresu stosowania rozporządzenia (WE) nr 561/2006 lub AETR</item>
+        <item>wykonywał pracę inną niż prowadzenie pojazdu</item>
+        <item>pozostawał w gotowości</item>
+    </string-array>
+
+
+</resources>
+

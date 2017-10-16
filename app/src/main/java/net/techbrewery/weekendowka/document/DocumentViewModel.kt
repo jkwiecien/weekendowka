@@ -107,6 +107,11 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
+    override fun onDriverActionSelected(action: String) {
+        val document = documentLiveData.value
+        document?.let { document.driverAction = action }
+    }
+
     override fun saveDocument(placeOfDeclarerSigning: String, placeOfDriverSigning: String) {
         val document = documentLiveData.value
         document?.let {

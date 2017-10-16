@@ -72,7 +72,7 @@ class PdfCreator(context: Context) {
             pdfDocument.add(Phrase("W okresie:\n", Font(ROBOTO_ITALIC, 14f)))
             pdfDocument.add(Phrase("od: ${DATE_TIME_FORMAT.print(document.actionStartDate.toDateTime())}\n", Font(ROBOTO_REGULAR, 14f)))
             pdfDocument.add(Phrase("do: ${DATE_TIME_FORMAT.print(document.actionEndDate.toDateTime())}\n", Font(ROBOTO_REGULAR, 14f)))
-            pdfDocument.add(Phrase("miał czas wolny od pracy\n\n", Font(ROBOTO_ITALIC, 14f)))
+            pdfDocument.add(Phrase("${document.driverAction}\n\n", Font(ROBOTO_ITALIC, 14f)))
 
             pdfDocument.add(Phrase("Miejscowość i data: ${document.placeOfDeclarerSigning}, ${DATE_FORMAT.print(document.dateOfDeclarerSigning.toDateTime())}\n", Font(ROBOTO_REGULAR, 14f)))
             pdfDocument.add(Phrase("Podpis: ________________________\n\n\n\n", Font(ROBOTO_REGULAR, 14f)))
