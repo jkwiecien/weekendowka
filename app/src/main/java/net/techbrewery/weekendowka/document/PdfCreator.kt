@@ -81,7 +81,6 @@ class PdfCreator(context: Context) {
             pdfDocument.add(Phrase("Miejscowość i data: ${document.placeOfDriverSigning}, ${DATE_FORMAT.print(document.dateOfDriverSigning.toDateTime())}\n", Font(ROBOTO_REGULAR, 14f)))
             pdfDocument.add(Phrase("Podpis kierowcy: ________________________\n\n\n\n", Font(ROBOTO_REGULAR, 14f)))
 
-
             pdfDocument.close()
 
             return file
