@@ -192,7 +192,7 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     }
 
     override fun setupDeclarerSigningPlaceInput() {
-        placeOfDriverSigningInputAtDocumentActivity.addTextChangedListener(object : TextWatcher {
+        placeOfDeclarerSigningInputAtDocumentActivity.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {}
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -201,7 +201,7 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
                 viewModel.onPlaceOfDeclarerSigningChanged(charSequence.toString())
             }
         })
-        placeOfDriverSigningInputAtDocumentActivity.setText(sharedPreferences.getString(BundleKey.PLACE_OF_DECLARER_SIGNING, ""))
+        placeOfDeclarerSigningInputAtDocumentActivity.setText(sharedPreferences.getString(BundleKey.PLACE_OF_DECLARER_SIGNING, ""))
     }
 
     override fun setupDriverSigningDateInput() {
@@ -262,7 +262,7 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     private fun save() {
         switcher.showProgressView()
         viewModel.saveDocument(
-                placeOfSigningInputAtDocumentActivity.text.toString(),
+                placeOfDeclarerSigningInputAtDocumentActivity.text.toString(),
                 placeOfDriverSigningInputAtDocumentActivity.text.toString()
         )
     }
