@@ -14,8 +14,10 @@ interface CompanyMvvm {
         fun setupDismissErrorButton()
         fun setupErrorObserver()
         fun setupCompanyObserver()
+        fun setupNameInput()
+        fun setupAddressInput()
+        fun setupPhoneNumberInput()
         fun setupEmailInput()
-        fun setSaveButtonEnabled(enabled: Boolean)
     }
 
     interface ViewModel {

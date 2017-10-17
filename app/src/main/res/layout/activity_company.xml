@@ -10,6 +10,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <View
+            android:id="@+id/focusCaptorAtCompanyActivity"
+            android:layout_width="0px"
+            android:layout_height="0px"
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
         <include
             layout="@layout/view_progress"
             android:layout_width="wrap_content"
@@ -100,6 +107,7 @@
                     android:id="@+id/phoneInputAtCompanyActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:digits="+0123456789"
                     android:hint="@string/hint_phone"
                     android:inputType="phone"
                     tools:text="+48 604 321 024" />

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Weekendowka</string>
+    <string name="app_name">Weekendówka</string>
     <string name="hint_company_name">Nazwa przedsiębiorstwa</string>
     <string name="hint_address">Ulica i nr, kod pocztowy, miejscowość, państwo:</string>
     <string name="hint_phone">Numer telefonu (w tym międzynarodowy numer kierunkowy):</string>
@@ -28,4 +28,8 @@
     <string name="activity_title_declarers">Wybór oświadczającego</string>
     <string name="activity_title_drivers">Wybór kierowcy</string>
     <string name="add_new">Dodaj kolejnego</string>
+    <string name="error_company_name_empty">Podaj nazwę przedsiębiorstwa</string>
+    <string name="error_company_address_too_short">Za mało danych</string>
+    <string name="error_phone_number_too_short">Numer telefonu zbyt krótki. Nie zapomnij o kierunkowym kraju (+48 dla Polski)</string>
+    <string name="error_email_invalid">To nie jest prawidłowy adres e-mail</string>
 </resources>
