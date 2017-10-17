@@ -19,6 +19,7 @@ interface DeclarerMvvm {
 
     interface ViewModel {
         var company: Company
+        var createFirst: Boolean
         val eventLiveData: MutableLiveData<DeclarerViewEvent>
 
         fun saveDeclarer(name: String, position: String)

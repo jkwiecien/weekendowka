@@ -6,4 +6,5 @@
     <dimen name="text_size_medium">16sp</dimen>
     <dimen name="text_size_large">18sp</dimen>
     <dimen name="time_picker_width">130dp</dimen>
+    <dimen name="declarer_item_height">70dp</dimen>
 </resources>

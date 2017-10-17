@@ -26,4 +26,5 @@
     <string name="hint_declarer">Oświadczający</string>
     <string name="hint_Driver">Kierowca</string>
     <string name="activity_title_declarers">Wybór oświadczającego</string>
+    <string name="add_new">Dodaj kolejnego</string>
 </resources>

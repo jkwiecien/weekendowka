@@ -14,6 +14,7 @@ import net.techbrewery.weekendowka.model.Declarer
 class DeclarerViewModel(application: Application) : AndroidViewModel(application), DeclarerMvvm.ViewModel {
 
     override lateinit var company: Company
+    override var createFirst: Boolean = true
 
     override val eventLiveData: MutableLiveData<DeclarerViewEvent> = MutableLiveData()
 
@@ -24,16 +25,22 @@ class DeclarerViewModel(application: Application) : AndroidViewModel(application
         company.declarers.add(declarer)
         company.selectedDeclarerId = declarer.id
 
-        repository.saveCompany(company, object : FirestoreRequestListener<Company> {
-            override fun onSuccess(responseObject: Company) {
-                eventLiveData.postValue(DeclarerViewEvent.DeclarerSaved(responseObject))
-            }
+        if (createFirst) {
+            repository.saveCompany(company, object : FirestoreRequestListener<Company> {
+                override fun onSuccess(responseObject: Company) {
+                    eventLiveData.postValue(DeclarerViewEvent.DeclarerSaved(responseObject, declarer))
+                }
 
-            override fun onFailure(error: Throwable) {
-                eventLiveData.postValue(DeclarerViewEvent.Error(error))
-            }
+                override fun onFailure(error: Throwable) {
+                    eventLiveData.postValue(DeclarerViewEvent.Error(error))
+                }
 
-        })
+            })
+        } else {
+            eventLiveData.postValue(DeclarerViewEvent.DeclarerCreated(declarer))
+        }
+
+
     }
 
 }

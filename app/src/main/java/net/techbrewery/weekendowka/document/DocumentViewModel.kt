@@ -5,29 +5,35 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.preference.PreferenceManager
 import net.techbrewery.weekendowka.base.BundleKey
+import net.techbrewery.weekendowka.base.extensions.addOrReplaceFirst
 import net.techbrewery.weekendowka.base.extensions.repository
 import net.techbrewery.weekendowka.base.extensions.toDateTime
 import net.techbrewery.weekendowka.base.network.FirestoreRequestListener
 import net.techbrewery.weekendowka.model.Company
+import net.techbrewery.weekendowka.model.Declarer
 import net.techbrewery.weekendowka.model.Document
 import net.techbrewery.weekendowka.model.Time
 import org.joda.time.DateTime
+import timber.log.Timber
 
 /**
  * Created by Jacek Kwiecień on 13.10.2017.
  */
 class DocumentViewModel(application: Application) : AndroidViewModel(application), DocumentMvvm.ViewModel {
 
-    override lateinit var company: Company
+    override var company: Company? = null
+        set(value) {
+            field = value
+            val document = Document()
+            document.declarer = value?.getSelectedDeclarer()
+            document.driver = value?.getSelectedDriver()
+            documentLiveData.value = document
+        }
 
     override val eventLiveData: MutableLiveData<DocumentViewEvent> = MutableLiveData()
     override val documentLiveData: MutableLiveData<Document> = MutableLiveData()
 
     private val repository = application.repository
-
-    init {
-        documentLiveData.value = Document()
-    }
 
     override fun getStartDateTime(): DateTime {
         val document = documentLiveData.value
@@ -122,9 +128,32 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
         PreferenceManager.getDefaultSharedPreferences(getApplication()).edit().putString(BundleKey.PLACE_OF_DRIVER_SIGNING, place).apply()
     }
 
+    override fun onSelectedDeclarerChanged(declarer: Declarer) {
+        val document = documentLiveData.value
+        val company = company
+        if (company != null && declarer != company.getSelectedDeclarer()) {
+            document?.let {
+                document.declarer = declarer
+                company.selectedDeclarerId = declarer.id
+                company.declarers.addOrReplaceFirst(declarer)
+                documentLiveData.postValue(document)
+
+                repository.saveCompany(company, object : FirestoreRequestListener<Company> {
+                    override fun onSuccess(responseObject: Company) {}
+
+                    override fun onFailure(error: Throwable) {
+                        Timber.e(error, "Changing declarer failed")
+                    }
+                })
+            }
+        }
+    }
+
     override fun saveDocument(placeOfDeclarerSigning: String, placeOfDriverSigning: String) {
         val document = documentLiveData.value
-        document?.let {
+        val company = company
+
+        if (company != null && document != null) {
             document.placeOfDeclarerSigning = placeOfDeclarerSigning
             document.placeOfDriverSigning = placeOfDriverSigning
             document.declarer = company.getSelectedDeclarer()

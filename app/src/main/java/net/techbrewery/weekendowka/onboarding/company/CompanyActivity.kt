@@ -57,7 +57,7 @@ class CompanyActivity : BaseActivity(), CompanyMvvm.View {
     override fun setupCompanyObserver() {
         viewModel.companyLiveData.observe(this, Observer { company ->
             company?.let {
-                DeclarerActivity.start(this, company)
+                DeclarerActivity.startToSetupFirst(this, company)
                 finish()
             }
         })

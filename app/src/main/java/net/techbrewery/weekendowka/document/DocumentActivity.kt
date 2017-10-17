@@ -16,13 +16,16 @@ import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
 import net.techbrewery.weekendowka.R
 import net.techbrewery.weekendowka.base.BundleKey
+import net.techbrewery.weekendowka.base.RequestCode
 import net.techbrewery.weekendowka.base.extensions.sharedPreferences
 import net.techbrewery.weekendowka.base.extensions.toDateTime
 import net.techbrewery.weekendowka.base.view.BaseActivity
 import net.techbrewery.weekendowka.base.view.DatePickerInput
 import net.techbrewery.weekendowka.base.view.TimePickerInput
 import net.techbrewery.weekendowka.model.Company
+import net.techbrewery.weekendowka.model.Declarer
 import net.techbrewery.weekendowka.model.Time
+import net.techbrewery.weekendowka.people.DeclarersActivity
 import org.joda.time.DateTime
 import pl.aprilapps.switcher.Switcher
 import timber.log.Timber
@@ -77,6 +80,8 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
         setupSelectedDeclarerInput()
         setupSelectedDriverInput()
         setupSaveButton()
+
+        focusCaptorAtDocumentActivity.requestFocus()
     }
 
     override fun setupEventObserver() {
@@ -106,6 +111,8 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     override fun setupDocumentObserver() {
         viewModel.documentLiveData.observe(this, Observer { document ->
             document?.let {
+                declarerInputAtDocumentActivity.setText(document.declarer?.name)
+                driverInputAtDocumentActivity.setText(document.driver?.name)
                 driverRestStartDateInputAtDocumentActivity.update(document.actionStartDate.toDateTime())
                 driverRestStartTimeInputAtDocumentActivity.update(Time(document.actionStartDate.toDateTime()))
                 driverRestEndDateInputAtDocumentActivity.update(document.actionEndDate.toDateTime())
@@ -230,20 +237,16 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     }
 
     override fun setupSelectedDeclarerInput() {
-        val selectedDeclarer = viewModel.company.getSelectedDeclarer()
-        selectedDeclarer?.let { declarerInputAtDocumentActivity.setText(selectedDeclarer.name) }
-
         declarerInputAtDocumentActivity.setOnClickListener {
-            //TODO
+            val company = viewModel.company
+            company?.let { DeclarersActivity.start(this, company) }
         }
     }
 
     override fun setupSelectedDriverInput() {
-        val selectedDriver = viewModel.company.getSelectedDriver()
-        selectedDriver?.let { driverInputAtDocumentActivity.setText(selectedDriver.name) }
-
         driverInputAtDocumentActivity.setOnClickListener {
-            //TODO
+            val company = viewModel.company
+//            company?.let { DriversActivity.start(this, company) }
         }
     }
 
@@ -265,5 +268,15 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
                 placeOfDeclarerSigningInputAtDocumentActivity.text.toString(),
                 placeOfDriverSigningInputAtDocumentActivity.text.toString()
         )
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (resultCode == Activity.RESULT_OK && requestCode == RequestCode.SELECT_DECLARER && data != null) {
+            val declarer = data.getSerializableExtra(BundleKey.DECLARER) as Declarer
+            viewModel.onSelectedDeclarerChanged(declarer)
+
+        }
     }
 }

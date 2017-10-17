@@ -10,6 +10,8 @@ import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
 import net.techbrewery.weekendowka.R
 import net.techbrewery.weekendowka.base.BundleKey
+import net.techbrewery.weekendowka.base.RequestCode
+import net.techbrewery.weekendowka.base.extensions.hideKeyboard
 import net.techbrewery.weekendowka.base.view.BaseActivity
 import net.techbrewery.weekendowka.model.Company
 import net.techbrewery.weekendowka.onboarding.driver.DriverActivity
@@ -22,10 +24,17 @@ import timber.log.Timber
 class DeclarerActivity : BaseActivity(), DeclarerMvvm.View {
 
     companion object {
-        fun start(activity: Activity, company: Company) {
+        fun startToSetupFirst(activity: Activity, company: Company) {
             val intent = Intent(activity, DeclarerActivity::class.java)
             intent.putExtra(BundleKey.COMPANY, company)
             activity.startActivity(intent)
+        }
+
+        fun startToAddNew(activity: Activity, company: Company) {
+            val intent = Intent(activity, DeclarerActivity::class.java)
+            intent.putExtra(BundleKey.COMPANY, company)
+            intent.putExtra(BundleKey.CREATE_FIRST, false)
+            activity.startActivityForResult(intent, RequestCode.CREATE_DECLARER)
         }
     }
 
@@ -37,6 +46,7 @@ class DeclarerActivity : BaseActivity(), DeclarerMvvm.View {
         setContentView(R.layout.activity_declarer)
         viewModel = ViewModelProviders.of(this).get(DeclarerViewModel::class.java)
         viewModel.company = intent.getSerializableExtra(BundleKey.COMPANY) as Company
+        viewModel.createFirst = intent.getBooleanExtra(BundleKey.CREATE_FIRST, true)
         setupView()
     }
 
@@ -64,6 +74,13 @@ class DeclarerActivity : BaseActivity(), DeclarerMvvm.View {
                     finish()
                 }
 
+                is DeclarerViewEvent.DeclarerCreated -> {
+                    val data = Intent()
+                    data.putExtra(BundleKey.DECLARER, event.declarer)
+                    setResult(Activity.RESULT_OK, data)
+                    finish()
+                }
+
                 is DeclarerViewEvent.Error -> {
                     Timber.e(event.error)
                     switcher.showErrorView()
@@ -85,6 +102,7 @@ class DeclarerActivity : BaseActivity(), DeclarerMvvm.View {
     }
 
     private fun save() {
+        positionInputArDeclarerActivity.hideKeyboard()
         switcher.showProgressView()
         viewModel.saveDeclarer(
                 nameInputArDeclarerActivity.text.toString(),

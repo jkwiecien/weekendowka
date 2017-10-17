@@ -41,10 +41,12 @@
             android:name=".onboarding.driver.DriverActivity"
             android:label="@string/activity_title_driver" />
 
-        <activity android:name=".document.DocumentActivity" />
+        <activity
+            android:name=".document.DocumentActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
 
         <activity
-            android:name=".declarers.DeclarersActivity"
+            android:name=".people.DeclarersActivity"
             android:label="@string/activity_title_declarers" />
 
     </application>

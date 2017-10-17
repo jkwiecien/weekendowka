@@ -2,6 +2,7 @@ package net.techbrewery.weekendowka.document
 
 import android.arch.lifecycle.MutableLiveData
 import net.techbrewery.weekendowka.model.Company
+import net.techbrewery.weekendowka.model.Declarer
 import net.techbrewery.weekendowka.model.Document
 import net.techbrewery.weekendowka.model.Time
 import org.joda.time.DateTime
@@ -33,7 +34,7 @@ interface DocumentMvvm {
     }
 
     interface ViewModel {
-        var company: Company
+        var company: Company?
         val eventLiveData: MutableLiveData<DocumentViewEvent>
         val documentLiveData: MutableLiveData<Document>
 
@@ -51,6 +52,7 @@ interface DocumentMvvm {
         fun onPlaceOfDriverSigningChanged(place: String)
         fun getDateOfDeclarerSigning(): DateTime
         fun getDateOfDriverSigning(): DateTime
+        fun onSelectedDeclarerChanged(declarer: Declarer)
         fun getEndTime(): Time
         fun saveDocument(placeOfDeclarerSigning: String, placeOfDriverSigning: String)
     }
