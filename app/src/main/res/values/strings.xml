@@ -32,4 +32,7 @@
     <string name="error_company_address_too_short">Za mało danych</string>
     <string name="error_phone_number_too_short">Numer telefonu zbyt krótki. Nie zapomnij o kierunkowym kraju (+48 dla Polski)</string>
     <string name="error_email_invalid">To nie jest prawidłowy adres e-mail</string>
+    <string name="error_name_invalid">To nie wygląda na prawidłowe imię i nazwisko</string>
+    <string name="error_position_empty">Należy podtać stanowisko</string>
+    <string name="error_id_number_too_short">Numer zbyt krótki</string>
 </resources>

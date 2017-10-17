@@ -6,12 +6,14 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.inputmethod.EditorInfo
 import kotlinx.android.synthetic.main.activity_driver.*
 import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
 import net.techbrewery.weekendowka.R
 import net.techbrewery.weekendowka.base.BundleKey
 import net.techbrewery.weekendowka.base.RequestCode
+import net.techbrewery.weekendowka.base.TextChangedListener
 import net.techbrewery.weekendowka.base.extensions.hideKeyboard
 import net.techbrewery.weekendowka.base.extensions.toDateTime
 import net.techbrewery.weekendowka.base.view.DatePickerInput
@@ -61,6 +63,8 @@ class DriverActivity : AppCompatActivity(), DriverMvvm.View {
         setupDriverObserver()
         setupBirthdayInput()
         setupEmploymentInput()
+        setupNameInput()
+        setupIdNumberInput()
     }
 
     override fun setupSwitcher() {
@@ -78,10 +82,6 @@ class DriverActivity : AppCompatActivity(), DriverMvvm.View {
 
     override fun setupSaveButton() {
         saveButtonAtDriverActivity.setOnClickListener { save() }
-    }
-
-    override fun setSaveButtonEnabled(enabled: Boolean) {
-        saveButtonAtDriverActivity.isEnabled = enabled
     }
 
     override fun setupEventObserver() {
@@ -141,6 +141,26 @@ class DriverActivity : AppCompatActivity(), DriverMvvm.View {
         }
     }
 
+    override fun setupNameInput() {
+        nameInputAtDriverActivity.addTextChangedListener(object : TextChangedListener() {
+            override fun onTextChanged(newText: String) {
+                nameInputLayoutAtDriverActivity.error = null
+            }
+        })
+    }
+
+    override fun setupIdNumberInput() {
+        idNumberInputAtDriverActivity.addTextChangedListener(object : TextChangedListener() {
+            override fun onTextChanged(newText: String) {
+                idNumberInputLayoutAtDriverActivity.error = null
+            }
+        })
+
+        idNumberInputAtDriverActivity.setOnEditorActionListener { textView, id, keyEvent ->
+            id != EditorInfo.IME_ACTION_NEXT
+        }
+    }
+
     override fun setupDriverObserver() {
         viewModel.driverLiveData.observe(this, Observer { driver ->
             driver?.let {
@@ -151,11 +171,29 @@ class DriverActivity : AppCompatActivity(), DriverMvvm.View {
     }
 
     private fun save() {
-        idNumberInputAtDriverActivity.hideKeyboard()
-        switcher.showProgressView()
-        viewModel.saveDriver(
-                nameInputAtDriverActivity.text.toString(),
-                idNumberInputAtDriverActivity.text.toString()
-        )
+        if (validate()) {
+            idNumberInputAtDriverActivity.hideKeyboard()
+            switcher.showProgressView()
+            viewModel.saveDriver(
+                    nameInputAtDriverActivity.text.toString(),
+                    idNumberInputAtDriverActivity.text.toString()
+            )
+        }
+    }
+
+    private fun validate(): Boolean {
+        var valid = true
+
+        if (nameInputAtDriverActivity.text.toString().length < 3) {
+            nameInputLayoutAtDriverActivity.error = getString(R.string.error_name_invalid)
+            valid = false
+        }
+
+        if (idNumberInputAtDriverActivity.text.toString().length < 5) {
+            idNumberInputLayoutAtDriverActivity.error = getString(R.string.error_id_number_too_short)
+            valid = false
+        }
+
+        return valid
     }
 }

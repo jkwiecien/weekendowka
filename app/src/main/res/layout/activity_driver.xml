@@ -58,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_declarer_name"
+                    android:imeOptions="actionNext"
                     android:inputType="textCapWords"
                     tools:text="Jacek Kwiecień" />
 
@@ -84,7 +85,7 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/idInputLayoutAtDriverActivity"
+                android:id="@+id/idNumberInputLayoutAtDriverActivity"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -99,6 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_driver_id"
+                    android:imeOptions="actionNext"
                     android:inputType="textCapCharacters"
                     tools:text="AFX 353568" />
 
@@ -113,7 +115,7 @@
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/idInputLayoutAtDriverActivity">
+                app:layout_constraintTop_toBottomOf="@+id/idNumberInputLayoutAtDriverActivity">
 
                 <net.techbrewery.weekendowka.base.view.DatePickerInput
                     android:id="@+id/employmentDateInputAtDriverActivity"

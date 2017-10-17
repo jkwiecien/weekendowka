@@ -58,6 +58,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_declarer_name"
+                    android:imeOptions="actionNext"
                     android:inputType="textCapWords"
                     tools:text="Stanisław Kwiecień" />
 
@@ -79,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_declarer_position"
+                    android:imeOptions="actionDone"
                     android:inputType="textCapSentences"
                     tools:text="właściciel" />
 

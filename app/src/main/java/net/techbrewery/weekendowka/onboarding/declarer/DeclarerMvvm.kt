@@ -14,7 +14,8 @@ interface DeclarerMvvm {
         fun setupSaveButton()
         fun setupDismissErrorButton()
         fun setupEventObserver()
-        fun setSaveButtonEnabled(enabled: Boolean)
+        fun setupNameInput()
+        fun setupPositionInput()
     }
 
     interface ViewModel {

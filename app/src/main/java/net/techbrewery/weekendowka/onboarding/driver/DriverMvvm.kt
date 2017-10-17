@@ -16,9 +16,10 @@ interface DriverMvvm {
         fun setupDismissErrorButton()
         fun setupEventObserver()
         fun setupDriverObserver()
+        fun setupNameInput()
+        fun setupIdNumberInput()
         fun setupBirthdayInput()
         fun setupEmploymentInput()
-        fun setSaveButtonEnabled(enabled: Boolean)
     }
 
     interface ViewModel {
