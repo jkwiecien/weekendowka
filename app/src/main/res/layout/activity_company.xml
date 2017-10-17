@@ -65,6 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_company_name"
+                    android:imeOptions="actionNext"
                     android:inputType="textCapSentences"
                     tools:text="Przewóz Osób Stanisław Kwiecień" />
 
@@ -86,6 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_address"
+                    android:imeOptions="actionNext"
                     android:inputType="textCapWords"
                     tools:text="Pasturka 16A, 28-400, Pińczów, Polska" />
 
@@ -109,6 +111,7 @@
                     android:layout_height="wrap_content"
                     android:digits="+0123456789"
                     android:hint="@string/hint_phone"
+                    android:imeOptions="actionNext"
                     android:inputType="phone"
                     tools:text="+48 604 321 024" />
 
@@ -131,6 +134,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/hint_e_mail"
+                    android:imeOptions="actionDone"
                     android:inputType="textEmailAddress"
                     tools:text="busponidzie@gmail.com" />
 

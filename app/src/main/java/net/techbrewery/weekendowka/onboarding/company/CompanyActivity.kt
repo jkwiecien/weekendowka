@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
+import android.view.inputmethod.EditorInfo
 import kotlinx.android.synthetic.main.activity_company.*
 import kotlinx.android.synthetic.main.view_error.*
 import kotlinx.android.synthetic.main.view_progress.*
@@ -106,6 +107,15 @@ class CompanyActivity : BaseActivity(), CompanyMvvm.View {
                 emailInputLayoutAtCompanyActivity.error = null
             }
         })
+
+        emailInputAtCompanyActivity.setOnEditorActionListener { textView, id, keyEvent ->
+            if (id == EditorInfo.IME_ACTION_DONE) {
+                save()
+                false
+            } else {
+                true
+            }
+        }
     }
 
     private fun save() {
