@@ -23,6 +23,7 @@ interface DriverMvvm {
 
     interface ViewModel {
         var company: Company
+        var createFirst: Boolean
         val eventLiveData: MutableLiveData<DriverViewEvent>
         val driverLiveData: MutableLiveData<Driver>
 

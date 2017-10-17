@@ -9,10 +9,7 @@ import net.techbrewery.weekendowka.base.extensions.addOrReplaceFirst
 import net.techbrewery.weekendowka.base.extensions.repository
 import net.techbrewery.weekendowka.base.extensions.toDateTime
 import net.techbrewery.weekendowka.base.network.FirestoreRequestListener
-import net.techbrewery.weekendowka.model.Company
-import net.techbrewery.weekendowka.model.Declarer
-import net.techbrewery.weekendowka.model.Document
-import net.techbrewery.weekendowka.model.Time
+import net.techbrewery.weekendowka.model.*
 import org.joda.time.DateTime
 import timber.log.Timber
 
@@ -143,6 +140,27 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
 
                     override fun onFailure(error: Throwable) {
                         Timber.e(error, "Changing declarer failed")
+                    }
+                })
+            }
+        }
+    }
+
+    override fun onSelectedDriverChanged(driver: Driver) {
+        val document = documentLiveData.value
+        val company = company
+        if (company != null && driver != company.getSelectedDriver()) {
+            document?.let {
+                document.driver = driver
+                company.selectedDriverId = driver.id
+                company.drivers.addOrReplaceFirst(driver)
+                documentLiveData.postValue(document)
+
+                repository.saveCompany(company, object : FirestoreRequestListener<Company> {
+                    override fun onSuccess(responseObject: Company) {}
+
+                    override fun onFailure(error: Throwable) {
+                        Timber.e(error, "Changing driver failed")
                     }
                 })
             }

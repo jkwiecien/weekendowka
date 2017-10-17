@@ -70,7 +70,7 @@ class DeclarerActivity : BaseActivity(), DeclarerMvvm.View {
         viewModel.eventLiveData.observe(this, Observer { event ->
             when (event) {
                 is DeclarerViewEvent.DeclarerSaved -> {
-                    DriverActivity.start(this, event.company)
+                    DriverActivity.startToSetupFirst(this, event.company)
                     finish()
                 }
 

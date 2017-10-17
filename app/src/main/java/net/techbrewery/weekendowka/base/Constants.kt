@@ -38,5 +38,7 @@ class RequestCode {
         val GOOGLE_SIGN_IN = 101
         val SELECT_DECLARER = 102
         val CREATE_DECLARER = 103
+        val SELECT_DRIVER = 104
+        val CREATE_DRIVER = 105
     }
 }

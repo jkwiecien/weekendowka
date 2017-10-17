@@ -24,8 +24,10 @@ import net.techbrewery.weekendowka.base.view.DatePickerInput
 import net.techbrewery.weekendowka.base.view.TimePickerInput
 import net.techbrewery.weekendowka.model.Company
 import net.techbrewery.weekendowka.model.Declarer
+import net.techbrewery.weekendowka.model.Driver
 import net.techbrewery.weekendowka.model.Time
 import net.techbrewery.weekendowka.people.DeclarersActivity
+import net.techbrewery.weekendowka.people.DriversActivity
 import org.joda.time.DateTime
 import pl.aprilapps.switcher.Switcher
 import timber.log.Timber
@@ -246,7 +248,7 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     override fun setupSelectedDriverInput() {
         driverInputAtDocumentActivity.setOnClickListener {
             val company = viewModel.company
-//            company?.let { DriversActivity.start(this, company) }
+            company?.let { DriversActivity.start(this, company) }
         }
     }
 
@@ -276,7 +278,9 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
         if (resultCode == Activity.RESULT_OK && requestCode == RequestCode.SELECT_DECLARER && data != null) {
             val declarer = data.getSerializableExtra(BundleKey.DECLARER) as Declarer
             viewModel.onSelectedDeclarerChanged(declarer)
-
+        } else if (resultCode == Activity.RESULT_OK && requestCode == RequestCode.SELECT_DRIVER && data != null) {
+            val driver = data.getSerializableExtra(BundleKey.DRIVER) as Driver
+            viewModel.onSelectedDriverChanged(driver)
         }
     }
 }

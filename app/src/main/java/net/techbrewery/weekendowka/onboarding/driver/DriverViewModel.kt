@@ -14,6 +14,7 @@ import net.techbrewery.weekendowka.model.Driver
 class DriverViewModel(application: Application) : AndroidViewModel(application), DriverMvvm.ViewModel {
 
     override lateinit var company: Company
+    override var createFirst: Boolean = true
 
     override val eventLiveData: MutableLiveData<DriverViewEvent> = MutableLiveData()
     override val driverLiveData: MutableLiveData<Driver> = MutableLiveData()
@@ -32,16 +33,19 @@ class DriverViewModel(application: Application) : AndroidViewModel(application),
             company.drivers.add(driver)
             company.selectedDriverId = driver.id
 
-            repository.saveCompany(company, object : FirestoreRequestListener<Company> {
-                override fun onSuccess(responseObject: Company) {
-                    eventLiveData.postValue(DriverViewEvent.DriverSaved(responseObject))
-                }
+            if (createFirst) {
+                repository.saveCompany(company, object : FirestoreRequestListener<Company> {
+                    override fun onSuccess(responseObject: Company) {
+                        eventLiveData.postValue(DriverViewEvent.DriverSaved(responseObject))
+                    }
 
-                override fun onFailure(error: Throwable) {
-                    eventLiveData.postValue(DriverViewEvent.Error(error))
-                }
-
-            })
+                    override fun onFailure(error: Throwable) {
+                        eventLiveData.postValue(DriverViewEvent.Error(error))
+                    }
+                })
+            } else {
+                eventLiveData.postValue(DriverViewEvent.DriverCreated(driver))
+            }
         }
     }
 

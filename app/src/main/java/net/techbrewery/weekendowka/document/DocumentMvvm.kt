@@ -1,10 +1,7 @@
 package net.techbrewery.weekendowka.document
 
 import android.arch.lifecycle.MutableLiveData
-import net.techbrewery.weekendowka.model.Company
-import net.techbrewery.weekendowka.model.Declarer
-import net.techbrewery.weekendowka.model.Document
-import net.techbrewery.weekendowka.model.Time
+import net.techbrewery.weekendowka.model.*
 import org.joda.time.DateTime
 
 /**
@@ -53,6 +50,7 @@ interface DocumentMvvm {
         fun getDateOfDeclarerSigning(): DateTime
         fun getDateOfDriverSigning(): DateTime
         fun onSelectedDeclarerChanged(declarer: Declarer)
+        fun onSelectedDriverChanged(driver: Driver)
         fun getEndTime(): Time
         fun saveDocument(placeOfDeclarerSigning: String, placeOfDriverSigning: String)
     }

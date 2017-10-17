@@ -49,6 +49,10 @@
             android:name=".people.DeclarersActivity"
             android:label="@string/activity_title_declarers" />
 
+        <activity
+            android:name=".people.DriversActivity"
+            android:label="@string/activity_title_drivers" />
+
     </application>
 
 </manifest>
