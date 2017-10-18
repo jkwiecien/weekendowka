@@ -35,4 +35,5 @@
     <string name="error_name_invalid">To nie wygląda na prawidłowe imię i nazwisko</string>
     <string name="error_position_empty">Należy podtać stanowisko</string>
     <string name="error_id_number_too_short">Numer zbyt krótki</string>
+    <string name="error_place_of_signing_empty">Podaj miejsce podpisania</string>
 </resources>

@@ -265,11 +265,29 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     }
 
     private fun save() {
-        switcher.showProgressView()
-        viewModel.saveDocument(
-                placeOfDeclarerSigningInputAtDocumentActivity.text.toString(),
-                placeOfDriverSigningInputAtDocumentActivity.text.toString()
-        )
+        if (validate()) {
+            switcher.showProgressView()
+            viewModel.saveDocument(
+                    placeOfDeclarerSigningInputAtDocumentActivity.text.toString(),
+                    placeOfDriverSigningInputAtDocumentActivity.text.toString()
+            )
+        }
+    }
+
+    private fun validate(): Boolean {
+        var valid = true
+
+        if (placeOfDeclarerSigningInputAtDocumentActivity.text.toString().isBlank()) {
+            placeOfDeclarerSigningInputLayoutAtDocumentActivity.error = getString(R.string.error_place_of_signing_empty)
+            valid = false
+        }
+
+        if (placeOfDriverSigningInputAtDocumentActivity.text.toString().isBlank()) {
+            placeOfDriverSigningInputLayoutAtDocumentActivity.error = getString(R.string.error_place_of_signing_empty)
+            valid = false
+        }
+
+        return valid
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
