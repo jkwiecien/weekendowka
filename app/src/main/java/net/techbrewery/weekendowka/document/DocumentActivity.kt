@@ -185,6 +185,18 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
         }
     }
 
+    override fun setupDriverSigningDateInput() {
+        dateOfDriverSigningInputAtDocumentActivity.datePickerListener = object : DatePickerInput.DatePickerListener {
+            override fun provideDate(): DateTime {
+                return viewModel.getDateOfDriverSigning()
+            }
+
+            override fun onDatePicked(date: DateTime) {
+                viewModel.onDateOfDriverSigningPicked(date)
+            }
+        }
+    }
+
     override fun setupDriverActionDropdown() {
         val adapter = ArrayAdapter.createFromResource(this, R.array.driver_actions, android.R.layout.simple_spinner_item)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -213,17 +225,6 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
         placeOfDeclarerSigningInputAtDocumentActivity.setText(sharedPreferences.getString(BundleKey.PLACE_OF_DECLARER_SIGNING, ""))
     }
 
-    override fun setupDriverSigningDateInput() {
-        dateOfDeclarerSigningInputAtDocumentActivity.datePickerListener = object : DatePickerInput.DatePickerListener {
-            override fun provideDate(): DateTime {
-                return viewModel.getDateOfDriverSigning()
-            }
-
-            override fun onDatePicked(date: DateTime) {
-                viewModel.onDateOfDriverSigningPicked(date)
-            }
-        }
-    }
 
     override fun setupDriverSigningPlaceInput() {
         placeOfDriverSigningInputAtDocumentActivity.addTextChangedListener(object : TextWatcher {
