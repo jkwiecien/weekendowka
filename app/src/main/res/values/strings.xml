@@ -9,8 +9,10 @@
     <string name="hint_driver_birthday">Data urodzenia</string>
     <string name="hint_driver_id">Numer prawa jazdy lub dowodu osobistego lub paszportu</string>
     <string name="hint_employment_date">Data zatrudnienia</string>
-    <string name="driver_rest_date_start_hint">Czas rozpoczęcia</string>
-    <string name="driver_rest_date_end_hint">Czas zakończenia</string>
+    <string name="driver_rest_date_start_hint">Data rozpoczęcia</string>
+    <string name="driver_rest_date_end_hint">Data zakończenia</string>
+    <string name="driver_rest_time_start_hint">Czas rozpoczęcia</string>
+    <string name="driver_rest_time_end_hint">Czas zakończenia</string>
     <string name="hint_place_of_declarer_signing">Miejsce podpisania oświadczającego</string>
     <string name="hint_place_of_driver_signing">Miejsce podpisania kierowcy</string>
     <string name="date">Data</string>

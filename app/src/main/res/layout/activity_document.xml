@@ -130,7 +130,7 @@
                     android:id="@+id/driverRestStartTimeInputAtDocumentActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/driver_rest_date_end_hint"
+                    android:hint="@string/driver_rest_time_start_hint"
                     tools:text="12:00" />
 
             </android.support.design.widget.TextInputLayout>
@@ -168,7 +168,7 @@
                     android:id="@+id/driverRestEndTimeInputAtDocumentActivity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/driver_rest_date_end_hint"
+                    android:hint="@string/driver_rest_time_end_hint"
                     tools:text="12:00" />
 
             </android.support.design.widget.TextInputLayout>
