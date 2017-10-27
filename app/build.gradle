@@ -10,8 +10,9 @@ static def gitTag() {
     return "git describe --tags --abbrev=0".execute().text.trim()
 }
 
-static def getAutoVersionName() {
-    return this.hasProperty("tag") || this.hasProperty("publish") ? "${gitTag()}" : "${gitCount()} {${gitSha()}}"
+def getAutoVersionName() {
+    def publish = hasProperty("publish") ? getProperty("publish") : false
+    return publish ? "${gitTag()}" : "${gitCount()} {${gitSha()}}"
 }
 
 apply plugin: 'com.android.application'
