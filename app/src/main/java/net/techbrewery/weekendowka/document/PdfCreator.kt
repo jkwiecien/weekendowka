@@ -25,6 +25,7 @@ class PdfCreator(context: Context) {
     private val fileDir = File(Environment.getExternalStorageDirectory(), "Weekendowka")
 
     companion object {
+        val FILE_NAME_DATE_FORMAT: DateTimeFormatter by lazy { DateTimeFormat.forPattern("dd-MM-yyyy HH:mm:ss") }
         val DATE_FORMAT: DateTimeFormatter by lazy { DateTimeFormat.forPattern("dd.MM.yyyy") }
         val DATE_TIME_FORMAT: DateTimeFormatter by lazy { DateTimeFormat.forPattern("HH:mm, dd.MM.yyyy") }
 
@@ -39,7 +40,7 @@ class PdfCreator(context: Context) {
 
         try {
             if (!fileDir.exists()) fileDir.mkdirs()
-            val file = File(fileDir, "${document.id}.pdf")
+            val file = File(fileDir, "${FILE_NAME_DATE_FORMAT.print(document.dateOfCreation.toDateTime())}.pdf")
             if (file.exists()) return file
             else file.createNewFile()
 

@@ -97,7 +97,6 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
                     val pdfCreator = PdfCreator(this)
                     val pdfFile = pdfCreator.createDocument(event.company, event.document)
                     pdfFile?.let {
-                        //FIXME
                         val uri = FileProvider.getUriForFile(this, applicationContext.packageName + ".file.provider", pdfFile)
                         val intent = Intent(Intent.ACTION_VIEW)
                         intent.setDataAndType(uri, "application/pdf")
