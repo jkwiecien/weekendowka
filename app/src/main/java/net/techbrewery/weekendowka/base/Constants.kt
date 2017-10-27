@@ -40,5 +40,6 @@ class RequestCode {
         val CREATE_DECLARER = 103
         val SELECT_DRIVER = 104
         val CREATE_DRIVER = 105
+        val REQUEST_WRITE_PERMISSION = 106
     }
 }

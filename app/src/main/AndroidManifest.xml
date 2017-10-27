@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.techbrewery.weekendowka">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -56,6 +57,7 @@
         <activity
             android:name=".people.DriversActivity"
             android:label="@string/activity_title_drivers" />
+        <activity android:name=".print.PrintActivity" />
 
     </application>
 

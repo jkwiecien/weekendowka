@@ -1,6 +1,7 @@
 package net.techbrewery.weekendowka.document
 
 import android.content.Context
+import android.os.Environment
 import com.itextpdf.text.*
 import com.itextpdf.text.pdf.BaseFont
 import com.itextpdf.text.pdf.PdfWriter
@@ -21,7 +22,7 @@ import java.io.PrintStream
  */
 class PdfCreator(context: Context) {
 
-    private val fileDir = context.cacheDir
+    private val fileDir = File(Environment.getExternalStorageDirectory(), "Weekendowka")
 
     companion object {
         val DATE_FORMAT: DateTimeFormatter by lazy { DateTimeFormat.forPattern("dd.MM.yyyy") }
@@ -37,6 +38,7 @@ class PdfCreator(context: Context) {
         val pdfDocument = com.itextpdf.text.Document()
 
         try {
+            if (!fileDir.exists()) fileDir.mkdirs()
             val file = File(fileDir, "${document.id}.pdf")
             if (file.exists()) return file
             else file.createNewFile()

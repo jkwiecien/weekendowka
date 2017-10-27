@@ -1,10 +1,14 @@
 package net.techbrewery.weekendowka.document
 
+import android.Manifest
 import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
 import android.text.Editable
 import android.text.TextWatcher
@@ -93,10 +97,10 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
                     val pdfCreator = PdfCreator(this)
                     val pdfFile = pdfCreator.createDocument(event.company, event.document)
                     pdfFile?.let {
+                        //FIXME
                         val uri = FileProvider.getUriForFile(this, applicationContext.packageName + ".file.provider", pdfFile)
                         val intent = Intent(Intent.ACTION_VIEW)
                         intent.setDataAndType(uri, "application/pdf")
-                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
                         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         startActivity(intent)
                         switcher.showContentView()
@@ -262,7 +266,13 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
     }
 
     override fun setupSaveButton() {
-        saveButtonAtDocumentActivity.setOnClickListener { save() }
+        saveButtonAtDocumentActivity.setOnClickListener {
+            if (isWritePermissionGranted()) {
+                save()
+            } else {
+                requestWritePermission()
+            }
+        }
     }
 
     private fun save() {
@@ -273,6 +283,14 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
                     placeOfDriverSigningInputAtDocumentActivity.text.toString()
             )
         }
+    }
+
+    private fun isWritePermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun requestWritePermission() {
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), RequestCode.REQUEST_WRITE_PERMISSION)
     }
 
     private fun validate(): Boolean {
@@ -300,6 +318,18 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
         } else if (resultCode == Activity.RESULT_OK && requestCode == RequestCode.SELECT_DRIVER && data != null) {
             val driver = data.getSerializableExtra(BundleKey.DRIVER) as Driver
             viewModel.onSelectedDriverChanged(driver)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if (requestCode == RequestCode.REQUEST_WRITE_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                save()
+            } else {
+                //TODO
+            }
         }
     }
 }
