@@ -38,6 +38,7 @@ interface DocumentMvvm {
         fun onStartDatePicked(dateTime: DateTime)
         fun onStartTimePicked(time: Time)
         fun onEndDatePicked(dateTime: DateTime)
+        fun setEndDateAsSigningDates()
         fun onEndTimePicked(time: Time)
         fun getStartDateTime(): DateTime
         fun getStartTime(): Time

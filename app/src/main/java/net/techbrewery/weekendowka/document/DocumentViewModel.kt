@@ -97,6 +97,7 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
         document?.let {
             document.setEndDate(dateTime)
             onEndDateSet()
+            eventLiveData.postValue(DocumentViewEvent.EndDateSet())
             documentLiveData.postValue(document)
         }
     }
@@ -116,7 +117,17 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
             val endDate = document.actionEndDate.toDateTime()
             if (document.actionStartDate.toDateTime().isAfter(endDate)) {
                 document.actionStartDate = endDate.minusHours(8).toDate()
+                documentLiveData.postValue(document)
             }
+        }
+    }
+
+    override fun setEndDateAsSigningDates() {
+        val document = documentLiveData.value
+        document?.let {
+            document.dateOfDeclarerSigning = document.actionEndDate
+            document.dateOfDriverSigning = document.actionEndDate
+            documentLiveData.postValue(document)
         }
     }
 

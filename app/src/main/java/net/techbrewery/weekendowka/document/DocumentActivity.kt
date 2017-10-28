@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v4.content.FileProvider
+import android.support.v7.app.AlertDialog
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -108,6 +109,13 @@ class DocumentActivity : BaseActivity(), DocumentMvvm.View {
                 is DocumentViewEvent.Error -> {
                     Timber.e(event.error)
                     switcher.showErrorView()
+                }
+                is DocumentViewEvent.EndDateSet -> {
+                    AlertDialog.Builder(this)
+                            .setMessage(getString(R.string.end_Date_set_dialog_message))
+                            .setPositiveButton(getString(R.string.Yes), { dialogInterface, i -> viewModel.setEndDateAsSigningDates() })
+                            .setNegativeButton(getString(R.string.No), null)
+                            .create().show()
                 }
             }
         })

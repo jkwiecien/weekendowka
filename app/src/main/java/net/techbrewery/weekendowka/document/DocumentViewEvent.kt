@@ -9,4 +9,5 @@ import net.techbrewery.weekendowka.model.Document
 sealed class DocumentViewEvent {
     class Error(val error: Throwable) : DocumentViewEvent()
     class DocumentSaved(val company: Company, val document: Document) : DocumentViewEvent()
+    class EndDateSet() : DocumentViewEvent()
 }

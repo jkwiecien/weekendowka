@@ -38,4 +38,7 @@
     <string name="error_position_empty">Należy podtać stanowisko</string>
     <string name="error_id_number_too_short">Numer zbyt krótki</string>
     <string name="error_place_of_signing_empty">Podaj miejsce podpisania</string>
+    <string name="end_Date_set_dialog_message">Czy chcesz ustawić tą datę jako daty podpisania dokumentu?</string>
+    <string name="Yes">Tak</string>
+    <string name="No">No</string>
 </resources>

@@ -43,7 +43,7 @@ class Document(var id: String = UUID.randomUUID().toString()) : Serializable {
     }
 
     fun setEndTime(time: Time) {
-        var dateTime = DateTime(actionStartDate)
+        var dateTime = DateTime(actionEndDate)
         dateTime = dateTime.withHourOfDay(time.hourOfDay).withMinuteOfHour(time.minuteOfHour)
         actionEndDate = dateTime.toDate()
     }
