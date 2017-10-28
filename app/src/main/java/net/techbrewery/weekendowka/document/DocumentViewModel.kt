@@ -68,7 +68,18 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
         val document = documentLiveData.value
         document?.let {
             document.setStartDate(dateTime)
+            onStartDateSet()
             documentLiveData.postValue(document)
+        }
+    }
+
+    private fun onStartDateSet() {
+        val document = documentLiveData.value
+        document?.let {
+            val startDate = document.actionStartDate.toDateTime()
+            if (document.actionEndDate.toDateTime().isBefore(startDate)) {
+                document.actionEndDate = startDate.plusHours(8).toDate()
+            }
         }
     }
 
@@ -76,6 +87,7 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
         val document = documentLiveData.value
         document?.let {
             document.setStartTime(time)
+            onStartDateSet()
             documentLiveData.postValue(document)
         }
     }
@@ -84,6 +96,7 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
         val document = documentLiveData.value
         document?.let {
             document.setEndDate(dateTime)
+            onEndDateSet()
             documentLiveData.postValue(document)
         }
     }
@@ -92,7 +105,18 @@ class DocumentViewModel(application: Application) : AndroidViewModel(application
         val document = documentLiveData.value
         document?.let {
             document.setEndTime(time)
+            onEndDateSet()
             documentLiveData.postValue(document)
+        }
+    }
+
+    private fun onEndDateSet() {
+        val document = documentLiveData.value
+        document?.let {
+            val endDate = document.actionEndDate.toDateTime()
+            if (document.actionStartDate.toDateTime().isAfter(endDate)) {
+                document.actionStartDate = endDate.minusHours(8).toDate()
+            }
         }
     }
 

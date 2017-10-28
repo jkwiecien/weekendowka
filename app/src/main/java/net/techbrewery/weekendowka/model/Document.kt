@@ -13,7 +13,8 @@ class Document(var id: String = UUID.randomUUID().toString()) : Serializable {
 
 
     var driverAction = ""
-    val dateOfCreation = Date()
+    var dateOfCreation = Date()
+        private set
     var actionStartDate = DateTime.now().toDate()
     var actionEndDate = DateTime.now().toDate()
     var placeOfDeclarerSigning = ""
@@ -52,6 +53,7 @@ class Document(var id: String = UUID.randomUUID().toString()) : Serializable {
         bundle.putSerializable(BundleKey.DOCUMENT, this)
         val copy = bundle.getSerializable(BundleKey.DOCUMENT) as Document
         copy.id = UUID.randomUUID().toString()
+        copy.dateOfCreation = DateTime.now().toDate()
         return copy
     }
 }
