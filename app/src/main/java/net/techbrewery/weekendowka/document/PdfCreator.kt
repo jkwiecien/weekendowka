@@ -70,7 +70,7 @@ class PdfCreator(context: Context) {
             pdfDocument.add(Phrase("Imię i nazwisko: ${document.driver?.name}\n", Font(ROBOTO_REGULAR, 14f)))
             pdfDocument.add(Phrase("Data urodzenia: ${DATE_FORMAT.print(document.driver?.birthday?.toDateTime())}\n", Font(ROBOTO_REGULAR, 14f)))
             pdfDocument.add(Phrase("Numer prawa jazdy lub dowodu osobistego lub paszportu:: ${document.driver?.idNumber}\n", Font(ROBOTO_REGULAR, 14f)))
-            pdfDocument.add(Phrase("Data rozpoczęcia pracy w przedsiębiorstwie: ${DATE_FORMAT.print(document.driver?.birthday?.toDateTime())}\n\n", Font(ROBOTO_REGULAR, 14f)))
+            pdfDocument.add(Phrase("Data rozpoczęcia pracy w przedsiębiorstwie: ${DATE_FORMAT.print(document.driver?.employmentDate?.toDateTime())}\n\n", Font(ROBOTO_REGULAR, 14f)))
 
             pdfDocument.add(Phrase("W okresie:\n", Font(ROBOTO_ITALIC, 14f)))
             pdfDocument.add(Phrase("od: ${DATE_TIME_FORMAT.print(document.actionStartDate.toDateTime())}\n", Font(ROBOTO_REGULAR, 14f)))
