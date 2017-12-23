@@ -6,7 +6,7 @@ import java.util.*
 /**
  * Created by Jacek Kwiecień on 13.10.2017.
  */
-class Declarer(val id: String = UUID.randomUUID().toString()) : Serializable {
+data class Declarer(val id: String = UUID.randomUUID().toString()) : Serializable {
     var name = ""
     var position = ""
 

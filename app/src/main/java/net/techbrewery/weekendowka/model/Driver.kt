@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Created by Jacek Kwiecień on 13.10.2017.
  */
-class Driver(val id: String = UUID.randomUUID().toString()) : Serializable {
+data class Driver(val id: String = UUID.randomUUID().toString()) : Serializable {
     var name = ""
     var birthday = DateTime.now().minusYears(Configuration.DEFAULT_DRIVER_AGE).toDate()
     var idNumber = ""
